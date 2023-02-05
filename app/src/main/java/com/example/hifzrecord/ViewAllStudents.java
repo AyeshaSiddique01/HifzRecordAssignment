@@ -18,19 +18,15 @@ public class ViewAllStudents extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
     ItemClickListener itemClickListener;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_students);
         Intent intent = getIntent();
-
         DBHandler db = new DBHandler(this);
         Students = db.getAllStudents();
-
         recyclerView = findViewById(R.id.StudentsRecyclerView);
-
         itemClickListener = new ItemClickListener() {
             @Override
             public void onClick(int position, Student value) {
@@ -39,7 +35,6 @@ public class ViewAllStudents extends AppCompatActivity {
                 startActivity(intent);
             }
         };
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RecyclerViewAdapter(Students, itemClickListener);
         recyclerView.setAdapter(adapter);

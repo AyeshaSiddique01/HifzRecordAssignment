@@ -1,16 +1,39 @@
 package com.example.hifzrecord;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class ViewStudentRecord extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class ViewStudentRecord extends AppCompatActivity {
+    List<StudentRecordBO> records;
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
+    RecyclerView.LayoutManager layoutManager;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_student_record);
+        setContentView(R.layout.single_item);
         Intent intent = getIntent();
+        int position = intent.getIntExtra("Student", 0);
+        //db
+        DBHandler db = new DBHandler(this);
+        RecordDbHandler recordDbHandler = new RecordDbHandler(this);
+        String studentName = db.getAllStudents().get(position).getName();
+        records = recordDbHandler.getAllRecords(studentName);
+        recyclerView = findViewById(R.id.StudentsRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(ViewStudentRecord.this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RecordsRecyclerviewAdapter(records) ;
+        recyclerView.setAdapter(adapter);
+
     }
 }
