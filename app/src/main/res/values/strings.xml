@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Hifz Record</string>
+    <string name="AddNewStudent">Add New Student</string>
+    <string name="ViewAllStudents">View All Students</string>
+    <string name="title_activity_add_new_student_page">AddNewStudentPage</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="EnterName">Enter Name</string>
+    <string name="AddNew">Add New Student</string>
+    <string name="AddStudentBtn">Add Student</string>
+    <string name="ListOfStudents">List Of Students</string>
+    <string name="StudentName">Student Name</string>
+    <string name="Sabak">Sabak</string>
+    <string name="Sabki">Sabki</string>
+    <string name="Manzil">Manzil</string>
+    <string name="AddNewRecordOfStudent">Add new record</string>
+    <string name="ViewRecentRecord">View recent records</string>
+    <string name="AddNewRecord">Add New Record Of Student</string>
+    <string name="AddRecordButton">Add Record</string>
+</resources>
