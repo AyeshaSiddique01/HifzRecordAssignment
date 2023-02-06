@@ -18,7 +18,10 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String Manzil = "Manzil";
     public static final String id = "id";
     public static final String Database_Table = "Student_Table";
-    String RecordTableStatement;
+
+    public static final String StudentName = "StudentName";
+    public static final String date = "dateAdded";
+    public static final String RecordsTable = "RecordsTable";
     public DBHandler(@Nullable Context context) {
         super(context, "HifzRecord.db", null, 4);
     }
@@ -32,10 +35,21 @@ public class DBHandler extends SQLiteOpenHelper {
                 + Manzil + " Integer, "
                 + Sabki + " Integer) ";
         db.execSQL(createStudentTableStatement);
+        String RecordTableStatement = "CREATE TABLE "+ RecordsTable
+                + "( " + id + " Integer PRIMARY KEY AUTOINCREMENT, "
+                + StudentName + " Text, "
+                + Sabak + " Integer, "
+                + Sabki + " Integer, "
+                + Manzil + " Integer, "
+                + date + " Text) ";
+        Log.d("Ayesha", RecordTableStatement);
+
+        db.execSQL(RecordTableStatement);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Database_Table);
+        db.execSQL("DROP TABLE IF EXISTS " + RecordsTable);
         onCreate(db);
     }
     public void AddStudent(Student std) {
@@ -66,5 +80,40 @@ public class DBHandler extends SQLiteOpenHelper {
         cursorCourses.close();
         db.close();
         return studentArrayList;
+    }
+    public ArrayList<StudentRecordBO> getAllRecords(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + StudentName + ", " + Sabak + ", " + Sabki + ", " + Manzil + ", " + date
+                + " FROM " + RecordsTable + " Where " + StudentName + " = '" + name + "';";
+
+        Cursor cursor = db.rawQuery(query, null);
+//        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<StudentRecordBO> recordArrayList = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (cursor.moveToFirst()) {
+            do {
+                recordArrayList.add(new StudentRecordBO(cursor.getString(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3),
+                        cursor.getString(4)));
+            } while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+        return recordArrayList;
+    }
+    public void AddRecord(StudentRecordBO sr) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(StudentName, sr.getStudentName());
+        cv.put(Sabak, sr.getSabak());
+        cv.put(Sabki, sr.getSabki());
+        cv.put(Manzil, sr.getManzil());
+        cv.put(date, sr.getDate());
+        db.insert(RecordsTable, null, cv);
+        db.close();
     }
 }

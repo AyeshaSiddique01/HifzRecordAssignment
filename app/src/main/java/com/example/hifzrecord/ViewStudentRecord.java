@@ -25,9 +25,9 @@ public class ViewStudentRecord extends AppCompatActivity {
         int position = intent.getIntExtra("Student", 0);
         //db
         DBHandler db = new DBHandler(this);
-        RecordDbHandler recordDbHandler = new RecordDbHandler(this);
+//        RecordDbHandler recordDbHandler = new RecordDbHandler(ViewStudentRecord.this);
         String studentName = db.getAllStudents().get(position).getName();
-        records = recordDbHandler.getAllRecords(studentName);
+        records = db.getAllRecords(studentName);
         recyclerView = findViewById(R.id.StudentsRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(ViewStudentRecord.this);

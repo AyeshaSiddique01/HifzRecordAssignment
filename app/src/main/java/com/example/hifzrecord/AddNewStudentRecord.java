@@ -26,7 +26,7 @@ public class AddNewStudentRecord extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra("Student", 0);
         DBHandler db = new DBHandler(this);
-        RecordDbHandler recordDbHandler = new RecordDbHandler(this);
+//        RecordDbHandler recordDbHandler = new RecordDbHandler(this);
         students = db.getAllStudents();
 
         Date = findViewById(R.id.DateRecording);
@@ -38,7 +38,7 @@ public class AddNewStudentRecord extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 StudentRecordBO studentRecordBO = new StudentRecordBO(students.get(position).getName(), Integer.parseInt(sabak.getText().toString()), Integer.parseInt(sabak.getText().toString()) - 1, Integer.parseInt(manzil.getText().toString()), Date.getText().toString());
-                recordDbHandler.AddRecord(studentRecordBO);
+                db.AddRecord(studentRecordBO);
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.studentaddedmsj,
                         (ViewGroup) findViewById(R.id.AddStudent_toast_viewgroup));
