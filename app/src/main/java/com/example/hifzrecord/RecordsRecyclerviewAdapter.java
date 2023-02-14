@@ -33,7 +33,6 @@ public class RecordsRecyclerviewAdapter extends RecyclerView.Adapter<RecordsRecy
         holder.sabak.setText(String.valueOf(holder.data.getSabak()));
         holder.sabki.setText(String.valueOf(holder.data.getSabki()));
         holder.manzil.setText(String.valueOf(holder.data.getManzil()));
-        holder.title.setText(String.valueOf(("Recent Record Of Student")));
     }
 
     @Override
@@ -43,7 +42,7 @@ public class RecordsRecyclerviewAdapter extends RecyclerView.Adapter<RecordsRecy
 
 
     public class MyVH extends RecyclerView.ViewHolder {
-        TextView date, sabak, sabki, manzil, title;
+        TextView date, sabak, sabki, manzil;
         StudentRecordBO data;
         public MyVH(@NonNull View itemView) {
             super(itemView);
@@ -51,7 +50,6 @@ public class RecordsRecyclerviewAdapter extends RecyclerView.Adapter<RecordsRecy
             sabak = itemView.findViewById(R.id.SabakCount);
             sabki = itemView.findViewById(R.id.SabkiCount);
             manzil = itemView.findViewById(R.id.ManzilCount);
-            title = itemView.findViewById(R.id.textView);
         }
     }
 }

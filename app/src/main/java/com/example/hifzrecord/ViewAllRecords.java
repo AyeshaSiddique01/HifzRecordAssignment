@@ -7,33 +7,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ViewStudentRecord extends AppCompatActivity {
-    List<StudentRecordBO> records;
-    RecyclerView recyclerView;
+public class ViewAllRecords extends AppCompatActivity {
+    ArrayList<StudentRecordBO> records;
+    RecyclerView rv;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.single_item);
+        setContentView(R.layout.activity_view_all_records);
+
         Intent intent = getIntent();
         int position = intent.getIntExtra("Student", 0);
-        //db
+
+
         DBHandler db = new DBHandler(this);
-//        RecordDbHandler recordDbHandler = new RecordDbHandler(ViewStudentRecord.this);
         String studentName = db.getAllStudents().get(position).getName();
+
         records = db.getAllRecords(studentName);
-        recyclerView = findViewById(R.id.StudentsRecyclerView);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(ViewStudentRecord.this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecordsRecyclerviewAdapter(records) ;
-        recyclerView.setAdapter(adapter);
+
+        rv = findViewById(R.id.RecordsRecyclerView);
+
+        rv.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager((ViewAllRecords.this));
+        rv.setLayoutManager(layoutManager);
+        adapter = new RecordsRecyclerviewAdapter(records);
+        rv.setAdapter(adapter);
 
     }
 }

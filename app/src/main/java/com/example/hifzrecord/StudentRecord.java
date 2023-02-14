@@ -31,7 +31,7 @@ public class StudentRecord extends AppCompatActivity {
         ViewAllRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentRecord.this, ViewStudentRecord.class);
+                Intent intent = new Intent(StudentRecord.this, ViewAllRecords.class);
                 intent.putExtra("Student", position);
                 startActivity(intent);
             }

@@ -36,14 +36,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 + Sabki + " Integer) ";
         db.execSQL(createStudentTableStatement);
         String RecordTableStatement = "CREATE TABLE "+ RecordsTable
-                + "( " + id + " Integer PRIMARY KEY AUTOINCREMENT, "
+                + " (" + id + " Integer PRIMARY KEY AUTOINCREMENT, "
                 + StudentName + " Text, "
                 + Sabak + " Integer, "
                 + Sabki + " Integer, "
                 + Manzil + " Integer, "
                 + date + " Text) ";
         Log.d("Ayesha", RecordTableStatement);
-
         db.execSQL(RecordTableStatement);
     }
     @Override
